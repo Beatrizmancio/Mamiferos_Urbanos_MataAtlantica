@@ -1,0 +1,36 @@
+#SCRIPT CAMTRAP X LIMITE MATA ATLANTICA
+
+getwd()
+# Abrir planilha camtrap
+ATLANTIC_camtrap <- read.csv2("ATLANTIC_CAMTRAP_dataset.csv", sep =";", header = T, dec = ',', na.strings = c("NULL","NA",""), as.is=TRUE)
+View(ATLANTIC_camtrap)
+summary(ATLANTIC_camtrap)
+plot(Latitude~Longitude, data=ATLANTIC_camtrap)
+install.packages("sf", dependences=TRUE)
+library(sf)
+mataatlantica_mma <- st_read("limite_ma_mma_wgs84.shp")
+# Consultar o Sistema de referencia de coordenadas (Coordinate Reference System = CRS)
+st_crs(mataatlantica_mma)
+#Visualizar o mapa do limite da Mata Atlantica (MMA/IBGE)
+plot(st_geometry(mataatlantica_mma))
+# Cruzar os dois objetos de dados para subconjunto e combinar os atributos. Podemos usar st_intersection para sobrepor e combinar os campos de atributo dos dois objetos de dados.
+ATLANTIC_camtrap_shp <- subset(ATLANTIC_camtrap, !is.na(ATLANTIC_camtrap$Latitude))##excluindo NA's dos valores de latitude
+View(ATLANTIC_camtrap_shp)
+##Apenas conferindo se nao ha nenhum valor de NA na Longitude
+teste <- is.na(ATLANTIC_camtrap$Longitude)
+t <- unique(teste) ##Somente deve aparecer Falso
+# Analise de dados espaciais “terra”
+library(terra)
+##Para conseguir georreferenciar a tabela nao pode ter dados faltantes na Latitude e Longitude
+ATLANTIC_camtrap_shp <- st_as_sf(ATLANTIC_camtrap_shp, coords = c("Longitude","Latitude"), crs = 4326)
+plot(st_geometry(ATLANTIC_camtrap_shp))
+
+##Salvando o shapefile de pontos
+st_write(ATLANTIC_camtrap_shp, "ATLANTIC_camtrap_pontos.shp")
+##Fazendo a intersecao entre os dois shapefiles
+shapefile_ATLANTIC_camtrap_Mataatlantica <- st_intersection(ATLANTIC_camtrap_shp,mataatlantica_mma)
+##Salvando o shapefile final
+st_write(shapefile_ATLANTIC_camtrap_Mataatlantica,
+         "ATLANTIC_camtrap_Mataatlantica.shp")
+View(shapefile_ATLANTIC_camtrap_Mataatlantica)
+plot(st_geometry(shapefile_ATLANTIC_camtrap_Mataatlantica))

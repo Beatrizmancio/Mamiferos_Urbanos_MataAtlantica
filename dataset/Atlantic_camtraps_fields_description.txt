@@ -1,0 +1,45 @@
+Descrição
+
+- ID = Identification code for each assemblages
+- location_id = Identification code for the location of the study 
+- site = Local name of the study area
+- municipality = Municipality of the study 
+- state = State or province of the study 
+- country = Name of the country
+- X = Longitude in decimal degrees
+- Y = Latitude in decimal degrees 
+- altitudeMin = Minimum altitude of study area when described
+- altitudeMax = Maximum altitude of study area when described
+- vegetation_type = Atlantic Forest Vegetation type according to Ribeiro et al. (2009)
+- PA = If the study or part of it was conducted in a protected area 
+- record_id = Identification code for each record 
+- survey_id = Identification code for each survey (one-to-many relationship link to SURVEY Table) 
+- species_id = Identification code for each survey (one-to-many relationship link to SPECIES Table)
+- species_code Code is the first four letters of the genus followed by the first four letters of the species scientific name
+- record = Number of records of each species during the survey
+- presence_absence = presence-absence data of species
+- study_id = Identification code for each study (one-to-many relationship link to STUDY Table)
+- location_id = Identification code for the location of the study (one-to-many relationship link to LOCATION Table)
+- survey_id = Identification code for each survey 
+- monthstart = month of the start of the survey 
+- yearstart = year of the start of the survey 
+- monthfinish = month of the end of the survey 
+- yearfinish = year of the end of the survey 
+- Effort = Sampling Effort: number of sampling stations * sampling period (trap-days)
+- n_cameras = Number of camera traps used in the study
+- cam_type = Type or brand of camera traps used 
+- design = Protocol used to distribute sampling points
+- n_points = Number of sample points 
+- cam_spacing = Average distance between sample points
+- cam_spacing_obs = Observation about camera trap spacing 
+- baiting = If any kind of baiting was used in the survey
+- records_obs = Observation about records. Independence among records criteria
+- species_id = Identification code for each species (one-to-many relationship link to SPECIES Table) 
+- order = Order of the species
+- family = Family of the species 
+- genus = Genus of the species 
+- species = Species name 
+- species_name = Scientific name of the species 
+- species_code = Code composed by 4 characters of species genus followed by 4 characters for species scientific name
+- iucn_status = IUCN status of the species (accessed April 2017). Critically endangered (CR), Data Deficient (DD), Endangered (EN), Least Concern (LC), Near Threatened (NT), Vulnerable (VU), Invasive (IN)
+- records (survey_id) = Each of the next columns are named with a code from survey_id (one-to-one relationship link to SURVEY table). Data in these columns correspond to the number of records of each species during the survey. In presence/absence surveys records are filled as "y".

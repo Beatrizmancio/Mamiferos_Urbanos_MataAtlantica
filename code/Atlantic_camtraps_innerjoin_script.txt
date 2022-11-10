@@ -1,0 +1,28 @@
+SCRIPT - UNIÃO DE PLANILHAS - CAMTRAP
+
+getwd()
+setwd("C:/Users/beatr/Documents/camtrap")
+getwd()
+
+camtrap_location <- read.csv2("location.csv", sep=";", header=T, dec=',', na.strings = c("NULL","NA",""), as.is=TRUE)
+View(camtrap_location)
+
+ATLANTIC_survey <- read.csv2("survey.csv", sep=";", header=T, dec=',', na.strings = c("NULL","NA",""), as.is=TRUE)
+View(ATLANTIC_survey)
+
+plan2 = merge (camtrap_location, ATLANTIC_survey, by.x = "location_id", by.y = "location_id")
+View(plan2)
+
+ATLANTIC_records <- read.csv2("records.csv", sep=";", header=T, dec=',', na.strings = c("NULL","NA",""), as.is=TRUE)
+View(ATLANTIC_records)
+
+plan3 = merge (plan2, ATLANTIC_records, by.x = "survey_id", by.y = "survey_id")
+View(plan3)
+
+ATLANTIC_especies <- read.csv2("especies.csv", sep=";", header=T, dec=',', na.strings = c("NULL","NA",""), as.is=TRUE)
+View(ATLANTIC_especies)
+
+plan4 = merge (plan3, ATLANTIC_especies, by.x = "species_id", by.y = "species_id")
+View(plan4)
+
+write.csv(plan4, file = "ATLANTIC_camtrap.csv")

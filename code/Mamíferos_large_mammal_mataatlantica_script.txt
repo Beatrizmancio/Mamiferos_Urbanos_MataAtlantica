@@ -1,0 +1,44 @@
+#SCRIPT LARGE MAMMAL X LIMITE MATA ATLANTICA
+
+# Abrir planilha large mammals
+getwd()
+setwd("C:/Users/beatr/Documents/planilhas")
+
+ATLANTIC_large_mammal <- read.csv2("ATLANTIC_LARGE_MAMMALdataset.csv", sep =";", header = T, dec = ',', na.strings = c("NULL","NA",""), as.is=TRUE)
+
+View(ATLANTIC_large_mammal)
+summary(ATLANTIC_large_mammal)
+
+plot(Latitude~Longitude, data=ATLANTIC_large_mammal)
+install.packages("sf", dependences=TRUE)
+
+library(sf)
+mataatlantica_mma <- st_read("limite_ma_mma_wgs84.shp")
+# Consultar o Sistema de referencia de coordenadas (Coordinate Reference System = CRS)
+st_crs(mataatlantica_mma)
+#Visualizar o mapa do limite da Mata Atlantica (MMA/IBGE)
+plot(st_geometry(mataatlantica_mma))
+# Cruzar os dois objetos de dados para subconjunto e combinar os atributos. Podemos usar st_intersection para sobrepor e combinar os campos de atributo dos dois objetos de dados.
+ATLANTIC_large_mammal_shp <- subset(ATLANTIC_large_mammal, !is.na(ATLANTIC_large_mammal$Latitude))##excluindo NA's dos valores de latitude
+View(ATLANTIC_large_mammal_shp)
+##Apenas conferindo se nao ha nenhum valor de NA na Longitude
+teste <- is.na(ATLANTIC_large_mammal$Longitude)
+t <- unique(teste) ##Somente deve aparecer Falso
+teste <- is.na(ATLANTIC_large_mammal$Latitude)
+t <- unique(teste)
+# Analise de dados espaciais “terra”
+library(terra)
+##Para conseguir georreferenciar a tabela nao pode ter dados faltantes na Latitude e Longitude
+   
+ATLANTIC_large_mammal_shp <- st_as_sf(ATLANTIC_large_mammal_shp, coords = c("Longitude","Latitude"), crs = 4326)
+
+
+##Salvando o shapefile de pontos
+st_write(ATLANTIC_large_mammal_shp, "ATLANTIC_large_mammal_pontos.shp")
+##Fazendo a intersecao entre os dois shapefiles
+shapefile_ATLANTIC_large_mammal_Mataatlantica <- st_intersection(ATLANTIC_large_mammal_shp,mataatlantica_mma)
+##Salvando o shapefile final
+st_write(shapefile_ATLANTIC_large_mammal_Mataatlantica,
+         "ATLANTIC_large_mammal_Mataatlantica.shp")
+View(shapefile_ATLANTIC_large_mammal_Mataatlantica)
+plot(st_geometry(shapefile_ATLANTIC_large_mammal_Mataatlantica))

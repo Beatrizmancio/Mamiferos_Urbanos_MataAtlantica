@@ -1,0 +1,5 @@
+As informações compiladas no Banco de dados dos mamiferos de areas urbanas da Mata Atlantica foram coletadas nas seguintes fontes:
+
+1) Shape do Limite da Mata Atlantica:
+Usamos o limite da Mata Atlântica do MMA/IBGE (2004) - arquivos limite_ma_mma_wgs84 - disponíveis no arquivo limites_wgs94.rar do repositório "Limits of the Atlantic Forest" (https://github.com/LEEClab/ATLANTIC-limits)
+

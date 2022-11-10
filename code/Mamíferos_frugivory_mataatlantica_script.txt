@@ -1,0 +1,38 @@
+#SCRIPT FRUGIVORY X LIMITE MATA ATLANTICA
+
+getwd()
+setwd("C:/Users/beatr/Documents/planilhas")
+getwd()
+# Abrir planilha ATLANTIC_frugivory.csv
+ATLANTIC_frugivory <- read.csv2("ATLANTIC_FRUGIVORY_dataset.csv", sep =";", header = T, dec = ',', na.strings = c("NULL","NA",""), as.is=TRUE)
+View(ATLANTIC_frugivory)
+summary(ATLANTIC_frugivory)
+plot(Latitude~Longitude, data=ATLANTIC_frugivory)
+install.packages("sf", dependences=TRUE)
+library(sf)
+mataatlantica_mma <- st_read("limite_ma_mma_wgs84.shp")
+# Consultar o Sistema de referencia de coordenadas (Coordinate Reference System = CRS)
+st_crs(mataatlantica_mma)
+#Visualizar o mapa do limite da Mata Atlantica (MMA/IBGE)
+plot(st_geometry(mataatlantica_mma))
+# Cruzar os dois objetos de dados para subconjunto e combinar os atributos. Podemos usar st_intersection para sobrepor e combinar os campos de atributo dos dois objetos de dados.
+ATLANTIC_frugivory_shp <- subset(ATLANTIC_frugivory, !is.na(ATLANTIC_frugivory$Latitude))##excluindo NA's dos valores de latitude
+View(ATLANTIC_frugivory_shp)
+##Apenas conferindo se nao ha nenhum valor de NA na Longitude
+teste <- is.na(ATLANTIC_frugivory$Longitude)
+t <- unique(teste) ##Somente deve aparecer Falso
+# Analise de dados espaciais “terra”
+library(terra)
+##Para conseguir georreferenciar a tabela nao pode ter dados faltantes na Latitude e Longitude
+ATLANTIC_frugivory_shp <- st_as_sf(ATLANTIC_frugivory_shp, coords = c("Longitude","Latitude"), crs = 4326)
+plot(st_geometry(ATLANTIC_frugivory_shp))
+
+##Salvando o shapefile de pontos
+st_write(ATLANTIC_frugivory_shp, "ATLANTIC_frugivory_pontos.shp")
+##Fazendo a intersecao entre os dois shapefiles
+shapefile_ATLANTIC_frugivory_Mataatlantica <- st_intersection(ATLANTIC_frugivory_shp,mataatlantica_mma)
+##Salvando o shapefile final
+st_write(shapefile_ATLANTIC_frugivory_Mataatlantica,
+         "ATLANTIC_frugivory_Mataatlantica.shp")
+View(shapefile_ATLANTIC_frugivory_Mataatlantica)
+plot(st_geometry(shapefile_ATLANTIC_frugivory_Mataatlantica))

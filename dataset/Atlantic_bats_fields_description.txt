@@ -1,0 +1,44 @@
+Descrição
+
+- ID = Identification code for each record.
+- Authors = Short name of author without special characters 
+- Type = Type of publication. Thesis refer to monographs, theses and dissertations.
+- Reference = Reference in Ecology style
+- Voucher_Specimens = Name of the collection where voucher specimens were deposited. It is possible to find more than one reference per study ID. 
+- Year_start = Year of the beginning of the study 
+- Year_finish = Year of the end of study. Many were vague. 
+- Duration = Unstandardized duration of study. Several were vague.
+- Season = Season reported in the reference paper 
+- Method = Capture method used for capturing bats 
+- Strata_sampling = Vertical strata location where capturing was performed
+- Nights = Total number of capture nights 
+- hours_per_night = Duration of capture, i.e. number of hours mistnets were open. We reported the maximum as 12 hours also for the studies conducted during the dry season. 
+- number_of_mistnets = Number of mistnets used, regardless of their length, mesh, or material. 
+- effort_straube_bianconi = Effort accounting area of the mistnets and duration of the survey given in hours*square meters (Straube and Bianconi 2002). Since many studies do not report mistnet size or model, this standardized measure is common for comparing bat inventories.
+- Sampling_habitat = Brief description of the area where the mist net stations were placed. Information was obtained from the reference paper or from the author of unpublished data.
+- Community = Reported bat assemblage. All: when all bat assemblage was reported. Leafnosed: phyllostomid species data (leaf-nosed bats) were reported. 
+- Class = Taxonomic class
+- Order = Taxonomic order
+- Superfamily = Taxonomic superfamily
+- Family = Taxonomic family
+- Capture_number = Number of captures 
+- Species = Species name
+- Status = Status in global assessment of IUCN Red List
+- Country = English name of the country
+- State = State, Province or Department of the study site derived based on the geographic coordinates
+- Municipality = Municipality of the study site derived based on the geographic coordinates 
+- Study_location = Local name of the study site derived based on the information in the reference paper.
+- Latitude Corrected and transformed coordinates of the latitude in decimal degrees (Datum WGS84). 
+- Longitude = Corrected and transformed coordinates of the longitude. 
+- Precision = Coordinate precision of the study site.
+- Reserve_Area = Reserve area reported in the reference paper, value in hectars (ha)
+- Altitude = Meters above sea level reported in the reference paper or obtained later based on the corrected coordinates
+- Altitude1km = Altitude in meters above sea level, from the Hydro-1K dataset 
+- Annual_mean_temperature = Annual mean temperature. 
+- Annual_rainfall = Annual rainfall. 
+- Olsong200r = Olson bioregion (Olson et al. 2001), represented by G200_REGIO column of the shapefile wwf_terr_ecos
+- Olsoneconame = ECO_NAME column of the shapefile wwf_terr_ecos available in WWF website (Olson et al. 2001).
+- ribeirovegtype = Type of vegetation sensu Ribeiro et al. (2009)
+- BSRs = Type of biogeographical sub-regions (BSRs) sensu Ribeiro et al. (2009)
+- uc = Level of protection of the study site area. Yes: protected areas, including Botanical Parks, National, State Parks. No: study site is not located in a protected area. 
+- protectedtype = Type of the protected area column DESIG of shapefile available in WDPA IUCN and UNEP-WCMC (year), The World Database on Protected Areas (WDPA) [Online], [insert month/year of the version downloaded], Cambridge, UK: UNEPWCMC.
